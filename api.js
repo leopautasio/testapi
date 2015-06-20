@@ -50,7 +50,7 @@ app.get('/person/:id', function (req, res) {
   if (people[req.params.id]) {
     res.status(200).send(people[req.params.id]);
   } else {
-    res.status(200);
+    res.status(404).send();
   }
 });
 
