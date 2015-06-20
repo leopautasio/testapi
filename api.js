@@ -5,7 +5,7 @@ var express  =  require('express');
 var mysql    =  require('mysql');
 
 var app      =  express();
-var people   =  [];
+var users   =  [];
 
 
 //********* DATABASE *********//
@@ -19,8 +19,8 @@ var connection =  mysql.createConnection({
 
 connection.query("use testapi");
 
-// obtain all people from db
-var strQuery = "select * from people";
+// obtain all users from db
+var strQuery = "select * from user";
 
 connection.query(strQuery, function (err, rows) {
   "use strict";
@@ -31,10 +31,12 @@ connection.query(strQuery, function (err, rows) {
   } else {
     connection.destroy();
         
-    // create array of people using people_id as array id
+    // create array of users using user_id as array id
+//    console.log(rows);
+    
     for (r in rows) {
       if (rows.hasOwnProperty(r)) {
-        people[rows[r].person_id] = rows[r];
+        users[rows[r].user_id] = rows[r];
       }
     }
   }
@@ -44,20 +46,20 @@ connection.query(strQuery, function (err, rows) {
 
 ////********* API *********//
 
-// API: get a person by its person_id
-app.get('/person/:id', function (req, res) {
+// API: get a user by its user_id
+app.get('/user/:user_id', function (req, res) {
   "use strict";
-  if (people[req.params.id]) {
-    res.status(200).send(people[req.params.id]);
+  if (users[req.params.user_id]) {
+    res.status(200).send(users[req.params.user_id]);
   } else {
-    res.status(404).send();
+    res.status(404).send('user not found');
   }
 });
 
-// API: get all people
-app.get('/people', function (req, res) {
+// API: get all users
+app.get('/users', function (req, res) {
   "use strict";
-  res.status(200).send(people);
+  res.status(200).send(users);
 });
 
 
