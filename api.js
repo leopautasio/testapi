@@ -31,9 +31,7 @@ connection.query(strQuery, function (err, rows) {
   } else {
     connection.destroy();
         
-    // create array of users using user_id as array id
-//    console.log(rows);
-    
+    // create array of users using user_id as array id    
     for (r in rows) {
       if (rows.hasOwnProperty(r)) {
         users[rows[r].user_id] = rows[r];
