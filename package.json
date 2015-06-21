@@ -2,10 +2,10 @@
   "name": "testapi",
   "version": "1.0.0",
   "description": "node/express/mysql rest api",
-  "main": "api.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "supervisor api.js"
+    "start": "supervisor index.js"
   },
   "author": "Leonardo Pautasio",
   "license": "ISC",
