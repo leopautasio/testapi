@@ -8,9 +8,9 @@
   },
  
   "prod": {
-    "host"      : "mysql",
-    "user"      : "root",
-    "password"  : "root",
+    "host"      : "mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/",
+    "user"      : "adminzaeQXBX",
+    "password"  : "7pI1bWnTCWAj",
     "database"  : "testapi"
   }
 }

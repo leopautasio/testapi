@@ -8,6 +8,8 @@ var env      =  require('./env');
 var app      =  express();
 var users    =  [];
 
+var ip       =  process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+
 //********* DATABASE *********//
 
 // db config
@@ -86,4 +88,4 @@ app.use(function (err, req, res, next) {
 
 // start server
 app.listen(3000);
-console.log('App Server running at port 3000 in ' + env.name);
+console.log('App Server running at port 3000 in ' + env.name + ' @ ' + ip);
