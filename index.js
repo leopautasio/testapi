@@ -9,6 +9,7 @@ var app      =  express();
 var users    =  [];
 
 var ip       =  process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var port     = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 //********* DATABASE *********//
 
@@ -87,5 +88,10 @@ app.use(function (err, req, res, next) {
 
 
 // start server
-app.listen(3000);
-console.log('App Server running at port 3000 in ' + env.name + ' @ ' + ip);
+app.listen(port);
+console.log('App Server running at port ' + port + ' in ' + env.name + ' @ ' + ip);
+//
+//
+//server.listen(port, ip, function(){
+//  console.log("Listening on " + ip + ", server_port " + port)
+//});
