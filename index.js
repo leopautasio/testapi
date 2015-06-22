@@ -15,7 +15,7 @@ var port     =  process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 // db config
 var db = require('./database.json')[env.name];
-var password = db.password ? db.password : null;
+var password = db.password || null;
     
 // create mysql connection
 var conn = {
@@ -89,9 +89,10 @@ app.use(function (err, req, res, next) {
 
 
 // start server
-app.listen(port);
-console.log('App Server running at port ' + port + ' in ' + env.name + ' @ ' + ip);
+//app.listen(port);
+//console.log('App Server running at port ' + port + ' in ' + env.name + ' @ ' + ip);
 
-//server.listen(port, ip, function(){
-//  console.log("Listening on " + ip + ", server_port " + port)
-//});
+app.listen(port, ip, function () {
+  "use strict";
+  console.log('Server running at port ' + port + ' in ' + env.name + ' @ ' + ip);
+});
