@@ -3,17 +3,15 @@
 var http     =  require('http');
 var express  =  require('express');
 var mysql    =  require('mysql');
+var env      =  require('./env');
 
 var app      =  express();
 var users    =  [];
-var env      =  app.get('env') === 'development' ? 'dev' : app.get('env');
-
 
 //********* DATABASE *********//
 
 // db config
-//var env = "dev";
-var db = require('./database.json')[env];
+var db = require('./database.json')[env.name];
 var password = db.password ? db.password : null;
     
 // create mysql connection
@@ -88,4 +86,4 @@ app.use(function (err, req, res, next) {
 
 // start server
 app.listen(3000);
-console.log('App Server running at port 3000 in ' + env);
+console.log('App Server running at port 3000 in ' + env.name);
