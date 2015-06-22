@@ -5,19 +5,27 @@ var express  =  require('express');
 var mysql    =  require('mysql');
 
 var app      =  express();
-var users   =  [];
+var users    =  [];
+var env      =  app.get('env') === 'development' ? 'dev' : app.get('env');
 
 
 //********* DATABASE *********//
 
+// db config
+//var env = "dev";
+var db = require('./database.json')[env];
+var password = db.password ? db.password : null;
+    
 // create mysql connection
-var connection =  mysql.createConnection({
-  host     :  "127.0.0.1",
-  user     :  "root",
-  password :  "root"
-});
+var conn = {
+    host     :  db.host,
+    user     :  db.user,
+    password :  db.password
+  };
 
-connection.query("use testapi");
+var connection =  mysql.createConnection(conn);
+
+connection.query("use " + db.database);
 
 // obtain all users from db
 var strQuery = "select * from user";
@@ -80,4 +88,4 @@ app.use(function (err, req, res, next) {
 
 // start server
 app.listen(3000);
-console.log('App Server running at port 3000');
+console.log('App Server running at port 3000 in ' + env);
