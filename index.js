@@ -9,7 +9,7 @@ var app      =  express();
 var users    =  [];
 
 var ip       =  process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-var port     = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var port     =  process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 //********* DATABASE *********//
 
@@ -24,13 +24,14 @@ var conn = {
     password :  db.password
   };
 
-var connection =  mysql.createConnection(conn);
+//var connection =  mysql.createConnection(conn);
 
-connection.query("use " + db.database);
+//connection.query("use " + db.database);
 
 // obtain all users from db
 var strQuery = "select * from user";
 
+/*
 connection.query(strQuery, function (err, rows) {
   "use strict";
   var r;
@@ -49,7 +50,7 @@ connection.query(strQuery, function (err, rows) {
   }
     
 });
-
+*/
 
 ////********* API *********//
 
