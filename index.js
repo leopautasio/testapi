@@ -3,21 +3,30 @@
 var http     =  require('http');
 var express  =  require('express');
 var mysql    =  require('mysql');
+var env      =  require('./env');
 
 var app      =  express();
-var users   =  [];
+var users    =  [];
 
+var ip       =  process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var port     = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 //********* DATABASE *********//
 
+// db config
+var db = require('./database.json')[env.name];
+var password = db.password ? db.password : null;
+    
 // create mysql connection
-var connection =  mysql.createConnection({
-  host     :  "127.0.0.1",
-  user     :  "root",
-  password :  "root"
-});
+var conn = {
+    host     :  db.host,
+    user     :  db.user,
+    password :  db.password
+  };
 
-connection.query("use testapi");
+var connection =  mysql.createConnection(conn);
+
+connection.query("use " + db.database);
 
 // obtain all users from db
 var strQuery = "select * from user";
@@ -79,5 +88,15 @@ app.use(function (err, req, res, next) {
 
 
 // start server
+<<<<<<< HEAD:index.js
 app.listen(3000);
 console.log('App Server running at port 3000');
+=======
+app.listen(port);
+console.log('App Server running at port ' + port + ' in ' + env.name + ' @ ' + ip);
+//
+//
+//server.listen(port, ip, function(){
+//  console.log("Listening on " + ip + ", server_port " + port)
+//});
+>>>>>>> develop:index.js
