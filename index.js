@@ -88,15 +88,9 @@ app.use(function (err, req, res, next) {
 
 
 // start server
-<<<<<<< HEAD:index.js
-app.listen(3000);
-console.log('App Server running at port 3000');
-=======
 app.listen(port);
 console.log('App Server running at port ' + port + ' in ' + env.name + ' @ ' + ip);
-//
-//
+
 //server.listen(port, ip, function(){
 //  console.log("Listening on " + ip + ", server_port " + port)
 //});
->>>>>>> develop:index.js
